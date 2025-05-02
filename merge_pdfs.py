@@ -14,14 +14,14 @@ def merge_pdfs(input_dir, output_file):
             print(filename)
 
     if len(pdfs_to_merge) > 0:
-        pdfWriter = PyPDF2.PdfFileWriter()
+        pdfWriter = PyPDF2.PdfWriter()
         for filename in pdfs_to_merge:
             pdfFileObj = open(filename, 'rb')
-            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+            pdfReader = PyPDF2.PdfReader(pdfFileObj)
             # Opening each page of the PDF
-            for pageNum in range(pdfReader.numPages):
-                pageObj = pdfReader.getPage(pageNum)
-                pdfWriter.addPage(pageObj)
+            for pageNum in range(len(pdfReader.pages)):
+                pageObj = pdfReader.pages[pageNum]
+                pdfWriter.add_page(pageObj)
 
         outfile = output_file + '.pdf'
         print()
